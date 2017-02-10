@@ -1,3 +1,6 @@
+<img src="bookcover.png" alt="Beginning WatchKit Development Book Cover" width="150" />
+<br />
+
 # Beginning WatchKit Development
 Sample code for the [Beginning WatchKit Development book](http://watchkitbook.com) by Cory Bohon and Kyle Richter
 

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AgC-eL-Hgc">
+    <device id="watch38" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="watchOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="11508"/>
+    </dependencies>
+    <scenes>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController">
+                    <items>
+                        <group width="1" height="1" alignment="left" id="LVA-7I-2ae">
+                            <items>
+                                <table alignment="left" id="ZWV-6N-iDS">
+                                    <items>
+                                        <tableRow identifier="MainRow" id="Ln4-gS-cdZ" customClass="MainRow">
+                                            <group key="rootItem" width="1" alignment="left" id="8j2-Fw-y0P">
+                                                <items>
+                                                    <imageView width="25" height="25" alignment="left" verticalAlignment="center" id="FKF-rh-8sR"/>
+                                                    <label width="1" alignment="left" verticalAlignment="center" text="Label" id="WAP-7p-tr8"/>
+                                                </items>
+                                            </group>
+                                            <connections>
+                                                <outlet property="image" destination="FKF-rh-8sR" id="vVX-ni-Yvw"/>
+                                                <outlet property="label" destination="WAP-7p-tr8" id="zm7-g1-gWl"/>
+                                            </connections>
+                                        </tableRow>
+                                    </items>
+                                </table>
+                            </items>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        </group>
+                    </items>
+                    <menu key="menu" id="kVv-qs-ADB">
+                        <items>
+                            <menuItem title="Refresh" icon="repeat" id="VAk-6r-1cG">
+                                <connections>
+                                    <action selector="reloadMenuButtonTapped:" destination="AgC-eL-Hgc" id="1D8-G8-HvB"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                    <connections>
+                        <outlet property="backgroundColorGroup" destination="LVA-7I-2ae" id="YFJ-aq-6Wp"/>
+                        <outlet property="table" destination="ZWV-6N-iDS" id="Zik-aD-iOU"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="220" y="345"/>
+        </scene>
+        <!--detailController-->
+        <scene sceneID="4LG-tq-kXu">
+            <objects>
+                <controller identifier="detailController" id="cPc-MN-Kc3" customClass="DetailController">
+                    <items>
+                        <label alignment="left" text="Song Title" id="HaN-DH-IaU"/>
+                        <movie width="1" height="100" alignment="left" id="Gxy-Ue-ZMp"/>
+                        <label width="1" alignment="left" text="Notes here" numberOfLines="0" id="vbp-4e-zAN"/>
+                        <imageView alignment="left" id="MbC-kh-EiC"/>
+                        <button width="1" alignment="left" title="Add Note" id="z1c-0z-Q1q">
+                            <connections>
+                                <action selector="addNoteButtonTapped:" destination="cPc-MN-Kc3" id="g4x-n5-wUg"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="audioPreviewMovie" destination="Gxy-Ue-ZMp" id="Mqh-1j-Ac6"/>
+                        <outlet property="emojiImage" destination="MbC-kh-EiC" id="cVS-HH-9tA"/>
+                        <outlet property="noteLabel" destination="vbp-4e-zAN" id="gfU-h1-024"/>
+                        <outlet property="songTitleLabel" destination="HaN-DH-IaU" id="aHf-r4-H1R"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="487" y="345"/>
+        </scene>
+    </scenes>
+</document>
