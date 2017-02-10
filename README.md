@@ -1,4 +1,4 @@
-<img src="bookcover.png" alt="Beginning WatchKit Development Book Cover" width="150" />
+<img src="https://github.com/corybohon/BeginningWatchKitDevelopment/raw/master/bookcover.png" alt="Beginning WatchKit Development Book Cover" width="150" />
 <br />
 
 # Beginning WatchKit Development
