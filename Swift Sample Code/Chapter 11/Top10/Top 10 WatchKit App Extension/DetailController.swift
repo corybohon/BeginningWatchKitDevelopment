@@ -1,0 +1,68 @@
+//
+//  DetailController.swift
+//  Top10
+//
+//  Created by Cory Bohon on 2/14/17.
+//  Copyright © 2017 Cory Bohon. All rights reserved.
+//
+
+import UIKit
+import WatchKit
+
+class DetailController: WKInterfaceController {
+    
+    @IBOutlet weak var songTitleLabel: WKInterfaceLabel?
+    @IBOutlet weak var audioPreviewMovie: WKInterfaceMovie?
+    @IBOutlet weak var noteLabel: WKInterfaceLabel?
+    
+    var item: JSONItem?
+
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
+        
+        let detailItem: JSONItem = context as! JSONItem
+        
+        self.songTitleLabel?.setText(detailItem.songTitle)
+        self.audioPreviewMovie?.setMovieURL(detailItem.audioPreviewURL)
+        
+        do {
+            let imageData: Data = try Data(contentsOf: detailItem.imageURL)
+            
+            // Store the file locally, then transfer
+            let fileName: String = detailItem.imageURL.lastPathComponent
+            let filePaths: Array<String> = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)
+            let path: String = (filePaths.first?.stringByAppendingPathComponent(pathComponent: fileName))!
+            let newFileURL: URL = URL(fileURLWithPath: path)
+            
+            FileManager.default.createFile(atPath: path, contents: imageData, attributes: nil)
+            SessionManager.shared.session?.transferFile(newFileURL, metadata: nil)
+            self.audioPreviewMovie?.setPosterImage(WKImage(imageData: imageData))
+            
+        } catch _ {
+            print("Unable to fetch image")
+        }
+        
+        self.audioPreviewMovie?.setLoops(false)
+        
+        self.item = detailItem
+    }
+    
+    override func didAppear() {
+        super.didAppear()
+        self.noteLabel?.setText(UserDefaults.standard.object(forKey: (self.item?.songTitle)!) as! String?)
+    }
+    
+    @IBAction func addNoteButtonTapped(sender: AnyObject) {
+        let suggestions: Array<String> = ["Love this song", "This is a good song", "Meh", "Worst. Song. Ever."]
+        
+        self.presentTextInputController(withSuggestions: suggestions, allowedInputMode: .allowEmoji) { (results: [Any]?) in
+            
+            if let unwrappedResults: Array<String> = results as! Array<String>? {
+                self.noteLabel?.setText(unwrappedResults.first)
+                UserDefaults.standard.set(unwrappedResults.first, forKey: (self.item?.songTitle)!)
+            } else {
+                print("Nothing returned")
+            }
+        }
+    }
+}
